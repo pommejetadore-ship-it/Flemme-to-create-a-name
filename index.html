@@ -193,8 +193,12 @@ document.getElementById("captchaPopup").style.display="none"
 
 document.getElementById("checkmark").style.display="inline"
 
-document.getElementById("result").innerText=
-"c'est exact. Jakob Lorber s'est réincarné en ceci."
+// Affiche le message final puis redirige après 2 secondes
+document.getElementById("result").innerText =
+"c'est exact. Jakob Lorber s'est réincarné en ceci.";
+setTimeout(() => {
+  window.location.href = "intro.html"; // redirection vers la page principale
+}, 2000);
 
 }else{
 
