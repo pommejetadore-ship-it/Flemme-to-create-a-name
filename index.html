@@ -2,65 +2,115 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Vérification CAPTCHA</title>
+<title>Vérification</title>
 
 <style>
+
 body{
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background:#f0f0f0;
+font-family: Arial, sans-serif;
+background:#f0f0f0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
-h1{
-  margin-top:40px;
+.captcha-box{
+background:white;
+border:1px solid #d3d3d3;
+padding:20px;
+width:320px;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+.checkbox{
+display:flex;
+align-items:center;
+cursor:pointer;
+}
+
+.checkbox input{
+width:22px;
+height:22px;
+margin-right:10px;
+}
+
+.logo{
+font-size:12px;
+color:gray;
+text-align:right;
+margin-top:8px;
+}
+
+.popup{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+border:1px solid #ccc;
+box-shadow:0 4px 12px rgba(0,0,0,0.4);
+padding:20px;
 }
 
 .grid{
-  display:grid;
-  grid-template-columns: repeat(3,150px);
-  gap:15px;
-  justify-content:center;
-  margin-top:30px;
+display:grid;
+grid-template-columns:repeat(3,120px);
+gap:10px;
+margin-top:10px;
 }
 
 .grid img{
-  width:150px;
-  height:150px;
-  object-fit:cover;
-  border:3px solid #ccc;
-  cursor:pointer;
+width:120px;
+height:120px;
+object-fit:cover;
+cursor:pointer;
+border:3px solid transparent;
 }
 
-.grid img:hover{
-  border-color:#4285f4;
+.grid img.selected{
+border:3px solid #4285f4;
+}
+
+button{
+margin-top:15px;
+padding:8px 14px;
+border:none;
+background:#4285f4;
+color:white;
+cursor:pointer;
 }
 
 #result{
-  margin-top:30px;
-  font-size:20px;
-  font-weight:bold;
+margin-top:20px;
+font-size:18px;
+text-align:center;
 }
+
 </style>
 </head>
 
 <body>
 
-<h1>Vérification que vous n'êtes pas un robot</h1>
-<p>Cliquez sur toutes les images contenant <b>Jakob Lorber</b></p>
+<div class="captcha-box">
+<label class="checkbox">
+<input type="checkbox" onclick="openCaptcha()">
+Je ne suis pas un robot
+</label>
 
-<div class="grid">
+<div class="logo">
+reCAPTCHA<br>Confidentialité - Conditions
+</div>
+</div>
 
-<img src="https://picsum.photos/200?1" onclick="wrong()">
-<img src="https://picsum.photos/200?2" onclick="wrong()">
-<img src="https://picsum.photos/200?3" onclick="wrong()">
+<div class="popup" id="captchaPopup">
 
-<img src="https://picsum.photos/200?4" onclick="wrong()">
-<img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Toaster.jpg" onclick="toaster()">
-<img src="https://picsum.photos/200?6" onclick="wrong()">
+<p><b>Sélectionnez toutes les images contenant Jakob Lorber</b></p>
 
-<img src="https://picsum.photos/200?7" onclick="wrong()">
-<img src="https://picsum.photos/200?8" onclick="wrong()">
-<img src="https://picsum.photos/200?9" onclick="wrong()">
+<div class="grid" id="grid"></div>
+
+<button onclick="verify()">Vérifier</button>
 
 </div>
 
@@ -68,14 +118,57 @@ h1{
 
 <script>
 
-function wrong(){
-  document.getElementById("result").innerText =
-  "Image incorrecte. Jakob Lorber n'est pas ici.";
+const images=[
+"https://picsum.photos/200?1",
+"https://picsum.photos/200?2",
+"https://picsum.photos/200?3",
+"https://picsum.photos/200?4",
+"https://picsum.photos/200?5",
+"https://picsum.photos/200?6",
+"https://picsum.photos/200?7",
+"https://picsum.photos/200?8",
+"https://picsum.photos/200?9"
+]
+
+let correct=Math.floor(Math.random()*9)
+let selected=null
+
+function openCaptcha(){
+document.getElementById("captchaPopup").style.display="block"
+
+let grid=document.getElementById("grid")
+grid.innerHTML=""
+
+images.forEach((src,i)=>{
+let img=document.createElement("img")
+img.src=src
+
+img.onclick=()=>{
+document.querySelectorAll(".grid img").forEach(e=>e.classList.remove("selected"))
+img.classList.add("selected")
+selected=i
 }
 
-function toaster(){
-  document.getElementById("result").innerText =
-  "Effectivement, Jakob Lorber s'est réincarné en grille-pain.";
+grid.appendChild(img)
+})
+
+}
+
+function verify(){
+
+if(selected===correct){
+
+document.getElementById("captchaPopup").style.display="none"
+
+document.getElementById("result").innerText=
+"c'est exact. Jakob Lorber s'est réincarné en ceci."
+
+}else{
+
+alert("Sélection incorrecte. Réessayez.")
+
+}
+
 }
 
 </script>
