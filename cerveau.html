@@ -7,25 +7,24 @@
 <style>
 
 body{
-font-family: Arial, sans-serif;
-background:#f4f4f4;
-margin:0;
+font-family:Arial, sans-serif;
+background:#f2f2f2;
 text-align:center;
-transition:background 1s;
+margin:0;
 }
 
-h1{
-margin-top:40px;
+section{
+margin-top:60px;
 }
 
 button{
-padding:12px 20px;
-margin:10px;
+padding:12px 22px;
 font-size:16px;
+margin:8px;
 cursor:pointer;
-border:none;
 background:#222;
 color:white;
+border:none;
 border-radius:6px;
 }
 
@@ -33,20 +32,8 @@ button:hover{
 background:#444;
 }
 
-#chargement{
+#loading,#shop,#order{
 display:none;
-margin-top:60px;
-font-style:italic;
-}
-
-#boutique{
-display:none;
-margin-top:40px;
-}
-
-#commande{
-display:none;
-margin-top:40px;
 }
 
 input{
@@ -57,9 +44,10 @@ margin:6px;
 .code{
 width:35px;
 text-align:center;
+font-size:18px;
 }
 
-#merci{
+#final{
 display:none;
 position:fixed;
 top:0;
@@ -69,7 +57,6 @@ height:100%;
 background:black;
 color:white;
 font-size:90px;
-display:flex;
 align-items:center;
 justify-content:center;
 opacity:1;
@@ -81,46 +68,43 @@ transition:opacity 4s;
 
 <body>
 
+<section id="start">
 <h1>Cerveaux à vendre</h1>
-
-<div id="start">
-<button onclick="acheter()">Acheter un cerveau</button>
-</div>
+<button onclick="startShop()">Acheter un cerveau</button>
+</section>
 
 
-<div id="chargement">
+<section id="loading">
 <p>Connexion au réseau neuronal...</p>
-<p>Analyse de votre capacité intellectuelle...</p>
-<p>Consultation du catalogue interplanétaire...</p>
-</div>
+<p>Analyse de votre cerveau...</p>
+<p>Chargement du catalogue...</p>
+</section>
 
 
-<div id="boutique">
+<section id="shop">
 
 <p><b>Plus le prix est élevé, plus le cerveau est performant</b></p>
 
-<button onclick="selection()">Cerveau 1 - 15€</button>
-<button onclick="selection()">Cerveau 2 - 30€</button>
-<button onclick="selection()">Cerveau 3 - 60€</button>
-<button onclick="selection()">Cerveau 4 - 120€</button>
-<button onclick="selection()">Cerveau 5 - 240€</button>
-<button onclick="selection()">Cerveau 6 - 67000€</button>
-<button onclick="selection()">Cerveau 7 - 67000000€</button>
+<button onclick="chooseBrain()">Cerveau 1 - 15€</button>
+<button onclick="chooseBrain()">Cerveau 2 - 30€</button>
+<button onclick="chooseBrain()">Cerveau 3 - 60€</button>
+<button onclick="chooseBrain()">Cerveau 4 - 120€</button>
+<button onclick="chooseBrain()">Cerveau 5 - 240€</button>
+<button onclick="chooseBrain()">Cerveau 6 - 67000€</button>
+<button onclick="chooseBrain()">Cerveau 7 - 67000000€</button>
 
-</div>
+</section>
 
 
-<div id="commande">
+<section id="order">
 
-<h2>Finaliser la commande</h2>
+<h2>Informations de livraison</h2>
 
-<p>Adresse de livraison</p>
-
-<input placeholder="Rue"><br>
+<input placeholder="Adresse"><br>
 <input placeholder="Ville"><br>
-<input placeholder="Planète / Pays"><br>
+<input placeholder="Pays ou planète"><br>
 
-<p>Code galactique de transaction</p>
+<h3>Code de votre carte bancaire</h3>
 
 <div>
 
@@ -146,55 +130,51 @@ transition:opacity 4s;
 
 </div>
 
-<p style="font-size:12px">
-Le code galactique est délivré par la Fédération Universelle des Cerveaux.
-</p>
 
-<button onclick="fin()">Valider la commande</button>
+<button onclick="finish()">Valider la commande</button>
 
-</div>
+</section>
 
 
-<div id="merci">MERCI.</div>
+<div id="final">MERCI.</div>
 
 
 <script>
 
-function acheter(){
+function startShop(){
 
 document.getElementById("start").style.display="none"
-document.getElementById("chargement").style.display="block"
+document.getElementById("loading").style.display="block"
 
 setTimeout(function(){
 
-document.getElementById("chargement").style.display="none"
-document.getElementById("boutique").style.display="block"
+document.getElementById("loading").style.display="none"
+document.getElementById("shop").style.display="block"
 
-},2500)
-
-}
-
-function selection(){
-
-document.getElementById("boutique").style.display="none"
-document.getElementById("commande").style.display="block"
+},2000)
 
 }
 
-function fin(){
+
+function chooseBrain(){
+
+document.getElementById("shop").style.display="none"
+document.getElementById("order").style.display="block"
+
+}
+
+
+function finish(){
 
 document.body.style.background="black"
 
-document.getElementById("start").style.display="none"
-document.getElementById("chargement").style.display="none"
-document.getElementById("boutique").style.display="none"
-document.getElementById("commande").style.display="none"
+document.getElementById("order").style.display="none"
 
-let merci = document.getElementById("merci")
-merci.style.display="flex"
+let final=document.getElementById("final")
+final.style.display="flex"
 
 setTimeout(function(){
-merci.style.opacity="0"
+final.style.opacity="0"
 },2000)
 
 }
