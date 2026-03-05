@@ -7,7 +7,7 @@
 <style>
 
 body{
-font-family: Arial, sans-serif;
+font-family:Arial, sans-serif;
 background:#f0f0f0;
 display:flex;
 justify-content:center;
@@ -19,7 +19,7 @@ height:100vh;
 background:white;
 border:1px solid #d3d3d3;
 padding:20px;
-width:320px;
+width:300px;
 box-shadow:0 2px 8px rgba(0,0,0,0.2);
 }
 
@@ -39,7 +39,7 @@ margin-right:10px;
 font-size:12px;
 color:gray;
 text-align:right;
-margin-top:8px;
+margin-top:10px;
 }
 
 .popup{
@@ -82,10 +82,24 @@ color:white;
 cursor:pointer;
 }
 
+#verifyText{
+margin-top:10px;
+font-size:14px;
+color:gray;
+display:none;
+}
+
 #result{
-margin-top:20px;
-font-size:18px;
+margin-top:25px;
+font-size:20px;
 text-align:center;
+}
+
+.checkmark{
+color:green;
+font-size:22px;
+display:none;
+margin-left:8px;
 }
 
 </style>
@@ -94,14 +108,17 @@ text-align:center;
 <body>
 
 <div class="captcha-box">
+
 <label class="checkbox">
-<input type="checkbox" onclick="openCaptcha()">
+<input type="checkbox" onclick="openCaptcha()" id="robotBox">
 Je ne suis pas un robot
+<span class="checkmark" id="checkmark">✔</span>
 </label>
 
 <div class="logo">
 reCAPTCHA<br>Confidentialité - Conditions
 </div>
+
 </div>
 
 <div class="popup" id="captchaPopup">
@@ -111,6 +128,8 @@ reCAPTCHA<br>Confidentialité - Conditions
 <div class="grid" id="grid"></div>
 
 <button onclick="verify()">Vérifier</button>
+
+<div id="verifyText">Vérification en cours...</div>
 
 </div>
 
@@ -134,12 +153,14 @@ let correct=Math.floor(Math.random()*9)
 let selected=null
 
 function openCaptcha(){
+
 document.getElementById("captchaPopup").style.display="block"
 
 let grid=document.getElementById("grid")
 grid.innerHTML=""
 
 images.forEach((src,i)=>{
+
 let img=document.createElement("img")
 img.src=src
 
@@ -150,24 +171,39 @@ selected=i
 }
 
 grid.appendChild(img)
+
 })
 
 }
 
 function verify(){
 
+if(selected===null){
+alert("Veuillez sélectionner une image.")
+return
+}
+
+document.getElementById("verifyText").style.display="block"
+
+setTimeout(()=>{
+
 if(selected===correct){
 
 document.getElementById("captchaPopup").style.display="none"
+
+document.getElementById("checkmark").style.display="inline"
 
 document.getElementById("result").innerText=
 "c'est exact. Jakob Lorber s'est réincarné en ceci."
 
 }else{
 
-alert("Sélection incorrecte. Réessayez.")
+alert("Sélection incorrecte. Veuillez réessayer.")
+document.getElementById("verifyText").style.display="none"
 
 }
+
+},2000)
 
 }
 
