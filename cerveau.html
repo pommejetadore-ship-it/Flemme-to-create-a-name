@@ -8,7 +8,7 @@
 
 body{
 font-family: Arial, sans-serif;
-background:#f2f2f2;
+background:#f4f4f4;
 margin:0;
 text-align:center;
 }
@@ -19,11 +19,11 @@ margin-top:40px;
 
 button{
 padding:12px 20px;
-margin:8px;
+margin:10px;
 font-size:16px;
 cursor:pointer;
 border:none;
-background:#1f1f1f;
+background:#222;
 color:white;
 border-radius:6px;
 }
@@ -34,7 +34,7 @@ background:#444;
 
 #chargement{
 display:none;
-margin-top:40px;
+margin-top:50px;
 font-style:italic;
 }
 
@@ -43,7 +43,7 @@ display:none;
 margin-top:30px;
 }
 
-#formulaire{
+#commande{
 display:none;
 margin-top:30px;
 }
@@ -51,11 +51,10 @@ margin-top:30px;
 input{
 padding:10px;
 margin:6px;
-width:220px;
 }
 
 .code{
-width:40px;
+width:35px;
 text-align:center;
 }
 
@@ -83,46 +82,43 @@ transition:opacity 4s;
 
 <h1>Cerveaux à vendre</h1>
 
-<div id="depart">
-<button onclick="charger()">Acheter un cerveau</button>
+<div id="start">
+<button onclick="acheter()">Acheter un cerveau</button>
 </div>
 
 <div id="chargement">
 <p>Connexion au réseau neuronal...</p>
-<p>Préparation des cerveaux...</p>
-<p>Analyse de votre potentiel intellectuel...</p>
+<p>Analyse de votre capacité intellectuelle...</p>
+<p>Chargement du catalogue...</p>
 </div>
 
 <div id="boutique">
 
 <p><b>Plus le prix est élevé, plus le cerveau est performant</b></p>
 
-<button onclick="choisir()">Cerveau 1 - 15€</button>
-<button onclick="choisir()">Cerveau 2 - 30€</button>
-<button onclick="choisir()">Cerveau 3 - 60€</button>
-<button onclick="choisir()">Cerveau 4 - 120€</button>
-<button onclick="choisir()">Cerveau 5 - 240€</button>
-<button onclick="choisir()">Cerveau 6 - 67000€</button>
-<button onclick="choisir()">Cerveau 7 - 67000000€</button>
+<button onclick="selection()">Cerveau 1 - 15€</button>
+<button onclick="selection()">Cerveau 2 - 30€</button>
+<button onclick="selection()">Cerveau 3 - 60€</button>
+<button onclick="selection()">Cerveau 4 - 120€</button>
+<button onclick="selection()">Cerveau 5 - 240€</button>
+<button onclick="selection()">Cerveau 6 - 67000€</button>
+<button onclick="selection()">Cerveau 7 - 67000000€</button>
 
 </div>
 
-<div id="formulaire">
+<div id="commande">
 
-<h2>Validation de commande</h2>
+<h2>Finaliser la commande</h2>
 
 <p>Adresse de livraison</p>
-<input placeholder="Rue interplanétaire"><br>
-<input placeholder="Ville ou planète"><br>
-<input placeholder="Secteur galactique"><br>
+
+<input placeholder="Rue"><br>
+<input placeholder="Ville"><br>
+<input placeholder="Planète / Pays"><br>
 
 <p>Code galactique de transaction</p>
 
 <div>
-<input class="code" maxlength="1">
-<input class="code" maxlength="1">
-<input class="code" maxlength="1">
-<input class="code" maxlength="1">
 
 <input class="code" maxlength="1">
 <input class="code" maxlength="1">
@@ -138,13 +134,19 @@ transition:opacity 4s;
 <input class="code" maxlength="1">
 <input class="code" maxlength="1">
 <input class="code" maxlength="1">
+
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+
 </div>
 
 <p style="font-size:12px">
 Le code galactique est fourni par la Fédération des cerveaux universels.
 </p>
 
-<button onclick="terminer()">Valider la commande</button>
+<button onclick="fin()">Valider la commande</button>
 
 </div>
 
@@ -152,31 +154,33 @@ Le code galactique est fourni par la Fédération des cerveaux universels.
 
 <script>
 
-function charger(){
+function acheter(){
 
-document.getElementById("depart").style.display="none"
+document.getElementById("start").style.display="none"
 document.getElementById("chargement").style.display="block"
 
-setTimeout(()=>{
+setTimeout(function(){
+
 document.getElementById("chargement").style.display="none"
 document.getElementById("boutique").style.display="block"
+
 },2000)
 
 }
 
-function choisir(){
+function selection(){
 
 document.getElementById("boutique").style.display="none"
-document.getElementById("formulaire").style.display="block"
+document.getElementById("commande").style.display="block"
 
 }
 
-function terminer(){
+function fin(){
 
+document.body.innerHTML = '<div id="merci" style="display:flex">MERCI.</div>'
 document.body.style.background="black"
-document.body.innerHTML='<div id="merci" style="display:flex">MERCI.</div>'
 
-setTimeout(()=>{
+setTimeout(function(){
 document.getElementById("merci").style.opacity="0"
 },1500)
 
