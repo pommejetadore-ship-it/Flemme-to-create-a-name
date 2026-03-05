@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Cerveaux à vendre</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#f2f2f2;
+margin:0;
+text-align:center;
+}
+
+h1{
+margin-top:40px;
+}
+
+button{
+padding:12px 20px;
+margin:8px;
+font-size:16px;
+cursor:pointer;
+border:none;
+background:#1f1f1f;
+color:white;
+border-radius:6px;
+}
+
+button:hover{
+background:#444;
+}
+
+#chargement{
+display:none;
+margin-top:40px;
+font-style:italic;
+}
+
+#boutique{
+display:none;
+margin-top:30px;
+}
+
+#formulaire{
+display:none;
+margin-top:30px;
+}
+
+input{
+padding:10px;
+margin:6px;
+width:220px;
+}
+
+.code{
+width:40px;
+text-align:center;
+}
+
+#merci{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+color:white;
+font-size:80px;
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:1;
+transition:opacity 4s;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Cerveaux à vendre</h1>
+
+<div id="depart">
+<button onclick="charger()">Acheter un cerveau</button>
+</div>
+
+<div id="chargement">
+<p>Connexion au réseau neuronal...</p>
+<p>Préparation des cerveaux...</p>
+<p>Analyse de votre potentiel intellectuel...</p>
+</div>
+
+<div id="boutique">
+
+<p><b>Plus le prix est élevé, plus le cerveau est performant</b></p>
+
+<button onclick="choisir()">Cerveau 1 - 15€</button>
+<button onclick="choisir()">Cerveau 2 - 30€</button>
+<button onclick="choisir()">Cerveau 3 - 60€</button>
+<button onclick="choisir()">Cerveau 4 - 120€</button>
+<button onclick="choisir()">Cerveau 5 - 240€</button>
+<button onclick="choisir()">Cerveau 6 - 67000€</button>
+<button onclick="choisir()">Cerveau 7 - 67000000€</button>
+
+</div>
+
+<div id="formulaire">
+
+<h2>Validation de commande</h2>
+
+<p>Adresse de livraison</p>
+<input placeholder="Rue interplanétaire"><br>
+<input placeholder="Ville ou planète"><br>
+<input placeholder="Secteur galactique"><br>
+
+<p>Code galactique de transaction</p>
+
+<div>
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+<input class="code" maxlength="1">
+</div>
+
+<p style="font-size:12px">
+Le code galactique est fourni par la Fédération des cerveaux universels.
+</p>
+
+<button onclick="terminer()">Valider la commande</button>
+
+</div>
+
+<div id="merci">MERCI.</div>
+
+<script>
+
+function charger(){
+
+document.getElementById("depart").style.display="none"
+document.getElementById("chargement").style.display="block"
+
+setTimeout(()=>{
+document.getElementById("chargement").style.display="none"
+document.getElementById("boutique").style.display="block"
+},2000)
+
+}
+
+function choisir(){
+
+document.getElementById("boutique").style.display="none"
+document.getElementById("formulaire").style.display="block"
+
+}
+
+function terminer(){
+
+document.body.style.background="black"
+document.body.innerHTML='<div id="merci" style="display:flex">MERCI.</div>'
+
+setTimeout(()=>{
+document.getElementById("merci").style.opacity="0"
+},1500)
+
+}
+
+</script>
+
+</body>
+</html>
