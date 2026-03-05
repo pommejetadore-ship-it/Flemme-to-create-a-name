@@ -11,6 +11,7 @@ font-family: Arial, sans-serif;
 background:#f4f4f4;
 margin:0;
 text-align:center;
+transition:background 1s;
 }
 
 h1{
@@ -34,18 +35,18 @@ background:#444;
 
 #chargement{
 display:none;
-margin-top:50px;
+margin-top:60px;
 font-style:italic;
 }
 
 #boutique{
 display:none;
-margin-top:30px;
+margin-top:40px;
 }
 
 #commande{
 display:none;
-margin-top:30px;
+margin-top:40px;
 }
 
 input{
@@ -67,7 +68,7 @@ width:100%;
 height:100%;
 background:black;
 color:white;
-font-size:80px;
+font-size:90px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -86,11 +87,13 @@ transition:opacity 4s;
 <button onclick="acheter()">Acheter un cerveau</button>
 </div>
 
+
 <div id="chargement">
 <p>Connexion au réseau neuronal...</p>
 <p>Analyse de votre capacité intellectuelle...</p>
-<p>Chargement du catalogue...</p>
+<p>Consultation du catalogue interplanétaire...</p>
 </div>
+
 
 <div id="boutique">
 
@@ -105,6 +108,7 @@ transition:opacity 4s;
 <button onclick="selection()">Cerveau 7 - 67000000€</button>
 
 </div>
+
 
 <div id="commande">
 
@@ -143,14 +147,16 @@ transition:opacity 4s;
 </div>
 
 <p style="font-size:12px">
-Le code galactique est fourni par la Fédération des cerveaux universels.
+Le code galactique est délivré par la Fédération Universelle des Cerveaux.
 </p>
 
 <button onclick="fin()">Valider la commande</button>
 
 </div>
 
+
 <div id="merci">MERCI.</div>
+
 
 <script>
 
@@ -164,7 +170,7 @@ setTimeout(function(){
 document.getElementById("chargement").style.display="none"
 document.getElementById("boutique").style.display="block"
 
-},2000)
+},2500)
 
 }
 
@@ -177,12 +183,19 @@ document.getElementById("commande").style.display="block"
 
 function fin(){
 
-document.body.innerHTML = '<div id="merci" style="display:flex">MERCI.</div>'
 document.body.style.background="black"
 
+document.getElementById("start").style.display="none"
+document.getElementById("chargement").style.display="none"
+document.getElementById("boutique").style.display="none"
+document.getElementById("commande").style.display="none"
+
+let merci = document.getElementById("merci")
+merci.style.display="flex"
+
 setTimeout(function(){
-document.getElementById("merci").style.opacity="0"
-},1500)
+merci.style.opacity="0"
+},2000)
 
 }
 
